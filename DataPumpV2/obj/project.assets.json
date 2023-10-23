@@ -1,0 +1,187 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.0": {
+      "SSH.NET/2020.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Renci.SshNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net40/Renci.SshNet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "YamlDotNet/13.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net35/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        }
+      }
+    },
+    ".NETFramework,Version=v4.0/win7-x86": {
+      "SSH.NET/2020.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Renci.SshNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net40/Renci.SshNet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "YamlDotNet/13.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net35/YamlDotNet.dll": {
+            "related": ".xml"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SSH.NET/2020.0.2": {
+      "sha512": "G0dNlTBAM00KZXv1wWVwgg26d9/METcM6qWBpNQwllzQmmbu+Zu+FS1L1X4fFgGdPu3e8k9mmTBu6SwtQ0614g==",
+      "type": "package",
+      "path": "ssh.net/2020.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/Renci.SshNet.dll",
+        "lib/net35/Renci.SshNet.xml",
+        "lib/net40/Renci.SshNet.dll",
+        "lib/net40/Renci.SshNet.xml",
+        "lib/netstandard1.3/Renci.SshNet.dll",
+        "lib/netstandard1.3/Renci.SshNet.xml",
+        "lib/netstandard2.0/Renci.SshNet.dll",
+        "lib/netstandard2.0/Renci.SshNet.xml",
+        "lib/sl4/Renci.SshNet.dll",
+        "lib/sl4/Renci.SshNet.xml",
+        "lib/sl5/Renci.SshNet.dll",
+        "lib/sl5/Renci.SshNet.xml",
+        "lib/uap10/Renci.SshNet.dll",
+        "lib/uap10/Renci.SshNet.xml",
+        "lib/wp71/Renci.SshNet.dll",
+        "lib/wp71/Renci.SshNet.xml",
+        "lib/wp8/Renci.SshNet.dll",
+        "lib/wp8/Renci.SshNet.xml",
+        "ssh.net.2020.0.2.nupkg.sha512",
+        "ssh.net.nuspec"
+      ]
+    },
+    "YamlDotNet/13.4.0": {
+      "sha512": "XkqTRgpt/tkqX9sOKcdPAZLVMktR5sBFwt7aK/PP061k9yoUntr/Qc8o9KshjSte34WYTIuCrpBs1+LwR7dFdA==",
+      "type": "package",
+      "path": "yamldotnet/13.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "images/yamldotnet.png",
+        "lib/net35/YamlDotNet.dll",
+        "lib/net35/YamlDotNet.xml",
+        "lib/net45/YamlDotNet.dll",
+        "lib/net45/YamlDotNet.xml",
+        "lib/net47/YamlDotNet.dll",
+        "lib/net47/YamlDotNet.xml",
+        "lib/net6.0/YamlDotNet.dll",
+        "lib/net6.0/YamlDotNet.xml",
+        "lib/net7.0/YamlDotNet.dll",
+        "lib/net7.0/YamlDotNet.xml",
+        "lib/netstandard2.0/YamlDotNet.dll",
+        "lib/netstandard2.0/YamlDotNet.xml",
+        "lib/netstandard2.1/YamlDotNet.dll",
+        "lib/netstandard2.1/YamlDotNet.xml",
+        "yamldotnet.13.4.0.nupkg.sha512",
+        "yamldotnet.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.0": [
+      "SSH.NET >= 2020.0.2",
+      "YamlDotNet >= 13.4.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\tn_merqe\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj",
+      "projectName": "DataPumpV2",
+      "projectPath": "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj",
+      "packagesPath": "C:\\Users\\tn_merqe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\tn_merqe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net40"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net40": {
+          "targetAlias": "net40",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net40": {
+        "targetAlias": "net40",
+        "dependencies": {
+          "SSH.NET": {
+            "target": "Package",
+            "version": "[2020.0.2, )"
+          },
+          "YamlDotNet": {
+            "target": "Package",
+            "version": "[13.4.0, )"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "win7-x86": {
+        "#import": []
+      }
+    }
+  }
+}

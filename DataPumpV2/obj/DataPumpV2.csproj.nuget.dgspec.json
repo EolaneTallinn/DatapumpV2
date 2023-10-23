@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj",
+        "projectName": "DataPumpV2",
+        "projectPath": "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj",
+        "packagesPath": "C:\\Users\\tn_merqe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\tn_merqe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net40"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net40": {
+            "targetAlias": "net40",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net40": {
+          "targetAlias": "net40",
+          "dependencies": {
+            "SSH.NET": {
+              "target": "Package",
+              "version": "[2020.0.2, )"
+            },
+            "YamlDotNet": {
+              "target": "Package",
+              "version": "[13.4.0, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

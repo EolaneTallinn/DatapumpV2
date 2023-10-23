@@ -1,0 +1,13 @@
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\bin\Release\net40\DataPumpV2.exe.config
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\bin\Release\net40\DataPumpV2.exe
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\bin\Release\net40\DataPumpV2.pdb
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\bin\Release\net40\Renci.SshNet.dll
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\bin\Release\net40\YamlDotNet.dll
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\obj\Release\net40\DataPumpV2.csproj.AssemblyReference.cache
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\obj\Release\net40\DataPumpV2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\obj\Release\net40\DataPumpV2.AssemblyInfoInputs.cache
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\obj\Release\net40\DataPumpV2.AssemblyInfo.cs
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\obj\Release\net40\DataPumpV2.csproj.CoreCompileInputs.cache
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\obj\Release\net40\DataPumpV2.csproj.CopyComplete
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\obj\Release\net40\DataPumpV2.exe
+C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\obj\Release\net40\DataPumpV2.pdb

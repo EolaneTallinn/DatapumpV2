@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "FF27uJu1fxUXubKKAuAyg9LnKA/eDmcxdiognJThmfxK4DM2NosoDf14wFJcG1fDx+AQAR2O9ye1kzc1nUI+zg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tn_merqe\\.nuget\\packages\\ssh.net\\2020.0.2\\ssh.net.2020.0.2.nupkg.sha512",
+    "C:\\Users\\tn_merqe\\.nuget\\packages\\yamldotnet\\13.4.0\\yamldotnet.13.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

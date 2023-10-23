@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Globals and RegexLibray are classes used in all the other classes">
+    <Position X="10.875" Y="0.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="The DatabaseManager class uses the SQLProcedures class to determine which procedure to call and if this procedure should return anything">
+    <Position X="10.802" Y="1.76" Height="1.552" Width="1.7" />
+  </Comment>
+  <Comment CommentText="The ConfigurationManager will load the configuration from the YAML and will define the attributes of the AppSetting class. The ImportMode which is one of these attributes should be one of the ImportMode enum. The ConfigurationManager is also responsible of checking that the app is up-to-date and will reload itself if not">
+    <Position X="6.729" Y="5.031" Height="1.656" Width="2.794" />
+  </Comment>
+  <Comment CommentText="The MessageManager class will build the messages to log. Those messages contains one of the values in the AppSteps enum (Context of the message) and one of the values of the SeverityEnum enum (Severity of the message)">
+    <Position X="4.719" Y="5.021" Height="1.865" Width="1.7" />
+  </Comment>
+  <Comment CommentText="The FileManager class will manage the search to find test log files and also the creation of the application log file. When handling files, the errors that could occur are in the FileError enum.">
+    <Position X="2.615" Y="4.146" Height="1.563" Width="1.7" />
+  </Comment>
+  <Comment CommentText="The FTPManager class is responsible for downloading and uploading files in the FTP server">
+    <Position X="0.688" Y="2.688" Height="1" Width="1.7" />
+  </Comment>
+  <Class Name="DataPumpV2.Classes.Globals" Collapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAACAIAAAQAAgAAEABAAABIAAAAABAAAAABAACAAAA=</HashCode>
+      <FileName>Classes\Globals.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataPumpV2.Classes.AppSettings" Collapsed="true">
+    <Position X="6.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAACAEAAAEAAAEAgBAAAABAAAAgA=</HashCode>
+      <FileName>Classes\Globals.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataPumpV2.Classes.SQLProcedures" Collapsed="true">
+    <Position X="8.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAABACgCAABAAAAA=</HashCode>
+      <FileName>Classes\Globals.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataPumpV2.Classes.ConfigurationManager" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Class Name="DataPumpV2.Classes.ConfigurationManager.YamlCollection" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Classes\ConfigurationManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QAAAQCAAAAAAIAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\ConfigurationManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataPumpV2.Classes.DatabaseManager" Collapsed="true">
+    <Position X="8.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>Classes\DatabaseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataPumpV2.Classes.FileManager" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAACAAAIBAAAAAAAAAAAAAAAAAAAAAAAAAgABA=</HashCode>
+      <FileName>Classes\FileManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataPumpV2.Classes.FTPManager" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAEIAAAAAAA=</HashCode>
+      <FileName>Classes\FTPManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataPumpV2.Classes.LogExtraction" Collapsed="true">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAgAAQAAKABAAAAEAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Classes\LogExtraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataPumpV2.Classes.MessageManager" Collapsed="true">
+    <Position X="4.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAQAAACAEAAAACAAAAACAAAQAAAAAAAAQA=</HashCode>
+      <FileName>Classes\MessageManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataPumpV2.Classes.RegexLibrary" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACBAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Classes\RegexLibrary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="DataPumpV2.Classes.ImportMode" Collapsed="true">
+    <Position X="6.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEABgASAAAAAAAAAAUAACAEAAAAAgAAAAAYCAA=</HashCode>
+      <FileName>Classes\Globals.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DataPumpV2.Classes.FileError" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAABAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Classes\Globals.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DataPumpV2.Classes.SeverityEnum" Collapsed="true">
+    <Position X="4.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAYAAAAAAABCAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Classes\Globals.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DataPumpV2.Classes.AppSteps" Collapsed="true">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIgAACAAAAAAA=</HashCode>
+      <FileName>Classes\Globals.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

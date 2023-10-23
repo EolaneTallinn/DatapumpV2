@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>DataPumpV2</id>
+    <version>1.0.0</version>
+    <authors>DataPumpV2</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0">
+        <dependency id="SSH.NET" version="2020.0.2" exclude="Build,Analyzers" />
+        <dependency id="YamlDotNet" version="13.1.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\kilian.monduc\Documents\IT_Projects\DataPumpV2\DataPumpV2\bin\Release\net40\DataPumpV2.exe" target="lib\net40\DataPumpV2.exe" />
+  </files>
+</package>

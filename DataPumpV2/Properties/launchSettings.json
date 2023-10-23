@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "DataPumpV2": {
+      "commandName": "Project",
+      "nativeDebugging": false,
+      "sqlDebugging": false
+    }
+  }
+}
