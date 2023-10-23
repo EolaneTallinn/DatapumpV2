@@ -1,0 +1,61 @@
+---
+ComputerCollection:
+    tn00p3052:
+        ProcessDataDir: "C:\\Users\\kilian.monduc\\Documents\\IT_Projects\\DataPumpV2\\LogFiles\\Prozessdaten"
+        SubDirFilter: "L663|L494|L405|L540"
+        LogNameFilter: "\\\\([^\\\\]*\\d{10}[^\\\\]*)$" #all of this backslash are necessary cause of regex recognation
+        AllowedExtensions: ".txt|.csv"
+        OperationName: "RGB"
+        ImportMode: "FAURGB"
+        DeepResearch: true
+        AppDebug: true
+        
+    tn00: #for vareol
+        ProcessDataDir: "C:\\Users\\kilian.monduc\\Documents\\IT_Projects\\DataPumpV2\\LogFiles\\Prozessdaten"
+        SubDirFilter: "DOP|D2|52|L4|22|X5|K33|K37|C519|SO|IM217B"
+        LogNameFilter: 
+        AllowedExtensions: ".dcl"
+        OperationName: "EOL"
+        ImportMode: "VAREOL"
+        DeepResearch: false
+        AppDebug: true
+        
+    tn01: #for fausng
+        ProcessDataDir: "C:\\Users\\kilian.monduc\\Documents\\IT_Projects\\DataPumpV2\\LogFiles\\Prozessdaten"
+        SubDirFilter: "D"
+        LogNameFilter: 
+        AllowedExtensions: ".txt|.csv"
+        OperationName: "SNG"
+        ImportMode: "FAUSNG"
+        DeepResearch: true
+        AppDebug: true
+        
+    tn02: #for faurgb
+        ProcessDataDir: "C:\\Users\\kilian.monduc\\Documents\\IT_Projects\\DataPumpV2\\LogFiles\\Prozessdaten"
+        SubDirFilter: "L663|L494|L405|L540"
+        LogNameFilter: "\\\\([^\\\\]*\\d{10}[^\\\\]*)$" #all of this backslash are necessary cause of regex recognation
+        AllowedExtensions: ".txt|.csv"
+        OperationName: "RGB"
+        ImportMode: "FAURGB"
+        DeepResearch: true
+        AppDebug: true
+        
+    tn03: #for EOLANE
+        ProcessDataDir: "C:\\Users\\kilian.monduc\\Documents\\IT_Projects\\DataPumpV2\\LogFiles\\Prozessdaten"
+        SubDirFilter: "C519HL|VW|SK380|SE310|X152|SE316|405HB|494HB|BLV|Eolane|Black|VEOCAM|BATS3|BATS2|ISABELLEN|BDM|5205841-BDM-2761|RD-SE316RL|JLR405|X590|RCL|520"
+        LogNameFilter:
+        AllowedExtensions: ".dat|.ngd|.dcl"
+        OperationName: "ICT"
+        ImportMode: "EOLANE"
+        DeepResearch: true
+        AppDebug: true
+        
+    tn04: #for TERADYNE
+        ProcessDataDir: "C:\\Users\\kilian.monduc\\Documents\\IT_Projects\\DataPumpV2\\LogFiles\\Prozessdaten"
+        SubDirFilter:
+        LogNameFilter:
+        AllowedExtensions: ".csv|.dcl|.xml"
+        OperationName: "ICT"
+        ImportMode: "TERADYNE"
+        DeepResearch: false
+        AppDebug: true
