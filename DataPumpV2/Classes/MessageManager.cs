@@ -85,7 +85,7 @@ namespace DataPumpV2.Classes
             NewNotification.Add("@Details", Message);
 
             //We create a record in DB for the specified serial number.
-            DatabaseManager.ExecuteStoredProcedure(SQLProcedures.NewNotification, NewNotification);
+            DatabaseManager.ExecuteStoredProcedure(SQLProcedures.NewNotification, Globals.SQLLogins["ExceptionDB"], NewNotification);
         }
     }
 }

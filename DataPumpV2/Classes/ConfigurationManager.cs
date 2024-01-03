@@ -54,7 +54,7 @@ namespace DataPumpV2.Classes
             try
             {
                 IDeserializer deserializer = new DeserializerBuilder().Build();
-                yamlContent = System.Text.Encoding.UTF8.GetString(FTPManager.Download("/3.ScriptVault/DATAPUMP.YAML"));
+                yamlContent = System.Text.Encoding.UTF8.GetString(FTPManager.Download("/3.app_source/DATAPUMP.YAML"));
                 YamlCollection yamlResult = deserializer.Deserialize<YamlCollection>(yamlContent);
 
                 // Convert all dic keys to uppercase
@@ -131,8 +131,8 @@ namespace DataPumpV2.Classes
 
             try
             {
-                string NewVersion = System.Text.Encoding.UTF8.GetString(FTPManager.Download("/3.ScriptVault/" + Path.GetFileName(Globals.VersionPath)));
-                string NewYamlContent = System.Text.Encoding.UTF8.GetString(FTPManager.Download("/3.ScriptVault/" + Path.GetFileName(Globals.configurationPath)));
+                string NewVersion = System.Text.Encoding.UTF8.GetString(FTPManager.Download("/3.app_source/" + Path.GetFileName(Globals.VersionPath)));
+                string NewYamlContent = System.Text.Encoding.UTF8.GetString(FTPManager.Download("/3.app_source/" + Path.GetFileName(Globals.configurationPath)));
 
                 if (AppSettings.CurrentVersion != NewVersion)
                 {

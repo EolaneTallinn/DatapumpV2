@@ -40,13 +40,14 @@ namespace DataPumpV2.Classes
             //{ "DBName", new string[] { server, db, user, password} }
             //{ "TestDB", new string[] { @"tndb01", @"TestDB", @"sequence", @"seq" } },
             { "DatapumpDB", new string[] { @"tndb01", @"DatapumpDB", @"Datapumper", @"Let$PumpSomeD4ta" } },
-            { "ExceptionDB", new string[] { @"tndb01", @"ExceptionDB", @"Datapumper", @"Let$PumpSomeD4ta" } }
+            { "ExceptionDB", new string[] { @"tndb01", @"ExceptionDB", @"Datapumper", @"Let$PumpSomeD4ta" } },
+            { "ProductionDB", new string[] { @"tndb01", @"ProductionDB", @"sequence", @"seq" } }
         };
 
         //  --- Live variables. (Variables that can be manipulated through the application life-cycle) ---
 
         //Whether the application is running - ActionLoop();
-        //internal static bool isRunning = true;
+        internal static bool isRunning = true;
         //internal static Random randomGen = new Random();
     }
 
@@ -118,6 +119,10 @@ namespace DataPumpV2.Classes
         internal static readonly ProcedureInfo NewActivityTrace = new ProcedureInfo("NewActivityTrace", false);
         internal static readonly ProcedureInfo NewNotification = new ProcedureInfo("NewNotification", false);
         internal static readonly ProcedureInfo GetTracePartionning = new ProcedureInfo("GetTracePartionning", true);
+        internal static readonly ProcedureInfo NewActivityTraceFileOld = new ProcedureInfo("NewActivityTraceFile", true);
+        internal static readonly ProcedureInfo NewActivityTraceOld = new ProcedureInfo("NewActivityTrace", true);
+        internal static readonly ProcedureInfo NewActivityAttribute = new ProcedureInfo("NewActivityAttribute", true);
+        internal static readonly ProcedureInfo AddActivityTraceField = new ProcedureInfo("AddActivityTraceField", true);
 
         //Just for attempts
         internal static readonly ProcedureInfo ProcedureTest = new ProcedureInfo("ProcedureTest", false);

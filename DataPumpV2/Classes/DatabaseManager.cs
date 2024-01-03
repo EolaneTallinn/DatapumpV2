@@ -19,20 +19,20 @@ namespace DataPumpV2.Classes
         /// <param name="storedProcedureName"></param>
         /// <param name="procedureParameters"></param>
         /// <returns>dictionnary of query's result</returns>
-        internal static List<Dictionary<string, object>> ExecuteStoredProcedure(SQLProcedures.ProcedureInfo storedProcedureName, Dictionary<string, object> procedureParameters = null)
+        internal static List<Dictionary<string, object>> ExecuteStoredProcedure(SQLProcedures.ProcedureInfo storedProcedureName, string[] logins,  Dictionary<string, object> procedureParameters = null)
         {
             List<Dictionary<string, object>> outResult = new List<Dictionary<string, object>>();
 
-            string[] logins;
+            //string[] logins;
 
-            if (storedProcedureName == SQLProcedures.NewNotification)
-            {
-                logins = Globals.SQLLogins["ExceptionDB"];
-            }
-            else
-            {
-                logins = Globals.SQLLogins["DatapumpDB"];
-            }
+            //if (storedProcedureName == SQLProcedures.NewNotification)
+            //{
+            //    logins = Globals.SQLLogins["ExceptionDB"];
+            //}
+            //else
+            //{
+            //    logins = Globals.SQLLogins["DatapumpDB"];
+            //}
 
             try
             {
@@ -124,7 +124,7 @@ namespace DataPumpV2.Classes
         {
             Dictionary<string, object> param = new Dictionary<string, object> { { "@ResourceName", ResourceName } };
 
-            int result = (int)(ExecuteStoredProcedure(SQLProcedures.CheckResourcePresence, param).First()["Presence"]);//On DB, the resource name must be written in uppercase.
+            int result = (int)(ExecuteStoredProcedure(SQLProcedures.CheckResourcePresence, Globals.SQLLogins["DatapumpDB"], param).First()["Presence"]);//On DB, the resource name must be written in uppercase.
 
             if (result != 0){
                 return true;

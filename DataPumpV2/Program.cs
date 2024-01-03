@@ -88,8 +88,8 @@ namespace DataPumpV2
             {
                 MessageManager.InitializeMessage(AppSteps.Restart, "Restarting", SeverityEnum.Warning);
 
-                File.WriteAllBytes(TempDir + exeName, FTPManager.Download("/3.ScriptVault/" + exeName));
-                File.WriteAllBytes(TempDir + VersionFileName, FTPManager.Download("/3.ScriptVault/" + VersionFileName));
+                File.WriteAllBytes(TempDir + exeName, FTPManager.Download("/3.app_source/" + exeName));
+                File.WriteAllBytes(TempDir + VersionFileName, FTPManager.Download("/3.app_source/" + VersionFileName));
 
                 Process process = new Process();
                 ProcessStartInfo startInfo = new ProcessStartInfo

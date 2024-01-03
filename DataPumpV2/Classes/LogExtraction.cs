@@ -10,6 +10,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Reflection.Emit;
 using System.Net.Sockets;
 using Renci.SshNet.Messages;
+using YamlDotNet.Core.Tokens;
 
 namespace DataPumpV2.Classes
 {
@@ -27,11 +28,38 @@ namespace DataPumpV2.Classes
             public string Status { get; set; }
             public string ResourceName { get; set; }
             public string Program { get; set; }
-            public string ResultForm { get; set; }
+            //public string ResultForm { get; set; }
             public DateTime? Timedate { get; set; }
         }
 
+        //TBC add check values
+        private class RawFileAttribute
+        {
+            internal RawFileAttribute(string attributeName, string data, Regex regex)
+            {
+                this.AttributeName = attributeName;
+                this.Data = data;
+                this.Regex = regex;
+            }
+            public string AttributeName { get; set; }
+            public string Data { get; set; }
+            public Regex Regex { get; set; }
+        }
+
+        //TBC add check values
+        private class FileAttribute
+        {
+            internal FileAttribute(string attributName, string value)
+            {
+                this.AttributeName = attributName;
+                this.Value = value;
+            }
+            public string AttributeName { get; set; }
+            public string Value { get; set; }
+        }
+
         private static List<ProductResult> ProductResultCollection = new List<ProductResult>();
+        private static List<FileAttribute> FileAttributesCollection = new List<FileAttribute>();
 
         private static List<string> StandardCSVHeader = new List<string> { "SerialNb", "Resource", "Form", "Result", "DateTime", "Operation", "Program" };
 
@@ -54,7 +82,7 @@ namespace DataPumpV2.Classes
                         File.SetAttributes(logFilePath, attributes);
                     }
 
-                    //We create our product resulty object, to populate it with results from the log file.
+                    //We create our product result object, to populate it with results from the log file.
                     ReturnProductResultsFromLog(logFilePath);
                     
                     //We only run SQL query if the file contains valid data
@@ -71,7 +99,45 @@ namespace DataPumpV2.Classes
                         NewLogFile.Add("@FileCreation", File.GetCreationTime(logFilePath));
 
                         //NewLogFile procedure call
-                        Dictionary<string, object> LogFile = DatabaseManager.ExecuteStoredProcedure(SQLProcedures.NewLogFile, NewLogFile).First();
+                        Dictionary<string, object> LogFile = DatabaseManager.ExecuteStoredProcedure(SQLProcedures.NewLogFile, Globals.SQLLogins["DatapumpDB"], NewLogFile).First();
+
+
+                        #region OLD DATAPUMP SYS
+                        //Assembling a dictionary to be passed in SqlParams. THIS IS TEMPORARY
+                        Dictionary<string, object> NewLogFileOld = new Dictionary<string, object>();
+                        NewLogFileOld.Add("@MD5", 1234);
+                        NewLogFileOld.Add("@FileName", fileName);
+                        NewLogFileOld.Add("@DirectoryName", @"\\varroc\results\" + Globals.computerName + serverLogPath);
+
+                        //Creating the record also in the old DB to handle the transition between the 2 programs. THIS IS TEMPORARY
+                        Dictionary<string, object> LogFileOld = DatabaseManager.ExecuteStoredProcedure(SQLProcedures.NewLogFile, Globals.SQLLogins["ProductionDB"], NewLogFileOld).First();
+                        #endregion
+
+
+                        foreach(FileAttribute attribute in FileAttributesCollection)
+                        {
+                            //Assembling a dictionary to be passed in SqlParams
+                            Dictionary<string, object> NewFileAttributes = new Dictionary<string, object>();
+                            NewFileAttributes.Add("@LogfileHandle", LogFile["Handle"]);
+                            NewFileAttributes.Add("@Attribute", attribute.AttributeName);
+                            NewFileAttributes.Add("@Value", attribute.Value);
+
+                            //NewLogFile procedure call
+                            DatabaseManager.ExecuteStoredProcedure(SQLProcedures.NewActivityAttribute, Globals.SQLLogins["DatapumpDB"], NewFileAttributes);
+
+
+                            #region OLD DATAPUMP SYS
+                            //Assembling a dictionary to be passed in SqlParams. THIS IS TEMPORARY
+                            Dictionary<string, object> NewFileAttributesOld = new Dictionary<string, object>();
+                            NewFileAttributes.Add("@ActivityTraceFileHandle", LogFile["Handle"]);
+                            NewFileAttributes.Add("@DataAttr", attribute.AttributeName);
+                            NewFileAttributes.Add("@DataValue", attribute.Value);
+
+                            //Creating the record also in the old DB to handle the transition between the 2 programs. THIS IS TEMPORARY
+                            DatabaseManager.ExecuteStoredProcedure(SQLProcedures.AddActivityTraceField, Globals.SQLLogins["ProductionDB"], NewFileAttributesOld);
+                            #endregion
+                        }
+
 
                         //We only continue if we obtain result from Newlogfile procedure
                         if (LogFile.Count > 0)
@@ -92,7 +158,24 @@ namespace DataPumpV2.Classes
                                 NewActivityTrace.Add("@Created", productResult.Timedate);
 
                                 //We create a record in DB for the specified serial number.
-                                DatabaseManager.ExecuteStoredProcedure(SQLProcedures.NewActivityTrace, NewActivityTrace);
+                                DatabaseManager.ExecuteStoredProcedure(SQLProcedures.NewActivityTrace, Globals.SQLLogins["DatapumpDB"], NewActivityTrace);
+
+
+                                #region OLD DATAPUMP SYS
+                                //Assembling a dictionary to be passed in SqlParams. THIS IS TEMPORARY
+                                Dictionary<string, object> NewActivityTraceOld = new Dictionary<string, object>();
+                                NewActivityTraceOld.Add("@Serial", productResult.SerialNb);
+                                NewActivityTraceOld.Add("@Result", productResult.Status);
+                                NewActivityTraceOld.Add("@Computer", productResult.ResourceName);
+                                NewActivityTraceOld.Add("@Operation", AppSettings.OperationName);
+                                NewActivityTraceOld.Add("@ProgramName", productResult.Program);
+                                NewActivityTraceOld.Add("@FileHashHandle", LogFileOld["FileHashHandle"]);
+                                NewActivityTraceOld.Add("@TestDate", productResult.Timedate);
+                                NewActivityTraceOld.Add("@EmployeeID", String.Empty);
+
+                                //Creating the record also in the old DB to handle the transition between the 2 programs. THIS IS TEMPORARY
+                                DatabaseManager.ExecuteStoredProcedure(SQLProcedures.NewActivityTraceOld, Globals.SQLLogins["ProductionDB"], NewActivityTraceOld);
+                                #endregion
                             }
 
                             FileManager.MovingToServer("1.test_logs" + serverLogPath, logFilePath);
@@ -126,6 +209,8 @@ namespace DataPumpV2.Classes
 
             List<Dictionary<string, string>> Records = new List<Dictionary<string, string>>();
 
+            List<RawFileAttribute> rawAttributes = new List<RawFileAttribute>();
+
             bool CSVMode = false;
 
             Regex serialNumberPattern = new Regex("");
@@ -140,8 +225,13 @@ namespace DataPumpV2.Classes
             string csvContent = null;
 
             string CustomProgram = null;
+            string CustomResource = null;
+            string CustomStatus = null;
+            DateTime? CustomDateTime = null;
+
             string PassResultRepresentation = null;
-            string resultForm = null;
+            //string resultForm = null;
+
 
             try
             {
@@ -158,7 +248,9 @@ namespace DataPumpV2.Classes
                         //progname is the folder name , no in the filecontent
                         CustomProgram = logFilePath.Replace(AppSettings.ProcessDataDir, "").Split('\\')[1];
                         PassResultRepresentation = "Passed";
-                        resultForm = "Pattern";
+
+
+                        rawAttributes.Add(new RawFileAttribute("ResultForm", "Pattern", null));
 
                         break;
 
@@ -169,7 +261,7 @@ namespace DataPumpV2.Classes
                         //progname is the folder name , no in the filecontent
                         CustomProgram = logFilePath.Replace(AppSettings.ProcessDataDir, "").Split('\\')[1];
                         PassResultRepresentation = "0";
-                        resultForm = "Pattern";
+                        rawAttributes.Add(new RawFileAttribute("ResultForm", "Pattern", null));
 
                         break;
 
@@ -183,7 +275,7 @@ namespace DataPumpV2.Classes
                         PassResultRepresentation = "P";
                         logFileContent = "," + ContentAsList[0] + ",";//we add "," to be sure there are here, for the regex match
 
-                        resultForm = "Pattern";
+                        rawAttributes.Add(new RawFileAttribute("ResultForm", "Pattern", null));
 
                         break;
 
@@ -198,6 +290,9 @@ namespace DataPumpV2.Classes
                         Records = StringToCSV(Header, csvContent, ";");
                         Records = CompletePatternId(Records);
 
+
+                        rawAttributes.Add(new RawFileAttribute("ResultForm", "Pattern", null));
+
                         break;
 
                     case ImportMode.TERADYNE:
@@ -211,25 +306,42 @@ namespace DataPumpV2.Classes
                         Records = StringToCSV(Header, csvContent, ";");
                         Records = CompletePatternId(Records);
 
+                        rawAttributes.Add(new RawFileAttribute("ResultForm", "Panel", null));
+
                         break;
 
-                    /*case ImportMode.VARLDM:
-                        //serialNumberPattern = new Regex(@"\nSerial Number:\s*([a-zA-Z0-9]+)");
-                        //ResultPattern = new Regex(@"\nUUT Result:\s*([a-zA-Z0-9]+)");
-                        //programNamePattern = new Regex(@"\n(?:Part Number:|Product ID:)\s*([A-Za-z0-9]+)");
-                        //ResourcePattern = new Regex(@"\nStation ID:\s*([a-zA-Z0-9, ]+)");
-                        //datePattern = new Regex(@"\nDate:\s*([a-zA-Z0-9, ]+)");
-                        //timePattern = new Regex(@"\nTime:\s*([0-9:]+ (?:AM|PM))");
+                    case ImportMode.VARLDM:
+                        serialNumberPattern = new Regex(@"\nSerial Number:\s*([a-zA-Z0-9]+)");
+                        ResultPattern = new Regex(@"\nUUT Result:\s*([a-zA-Z0-9]+)");
+                        programNamePattern = new Regex(@"\n(?:Part Number:|Product ID:)\s*([A-Za-z0-9]+)");
+                        ResourcePattern = new Regex(@"\nStation ID:\s*([a-zA-Z0-9, ]+)");
+                        datePattern = new Regex(@"\nDate:\s*([a-zA-Z0-9, ]+)");
+                        timePattern = new Regex(@"\nTime:\s*([0-9:]+ (?:AM|PM))");
 
-                        //PassResultRepresentation = "Passed";
-                        //resultForm = "Pattern";
+                        PassResultRepresentation = "Passed";
+
+                        rawAttributes.Add(new RawFileAttribute("ResultForm", "Pattern", null));
 
                         break;
 
                     case ImportMode.JADE:
+                        string regexResultRows = @"^(\d{2}[:]\d{2}[:]\d{2})\s+[[]SYSTEM[\]]\s+Board Processed[:]\sProgram=([_a-zA-Z-0-9. ]+)\s-\sT=(\d+)deg C - Pump=(\d+)rpm - Time=(\d+[.]\d)secs -.+Count=(\d+)$";
+                        List<string> resultRows = Regex.Matches(logFileContent, regexResultRows).Cast<Match>().Select(m => m.Value).ToList();
+                        resultRows = resultRows.Skip(Math.Max(0, resultRows.Count() - 1)).ToList();
+
+                        logFileContent = resultRows[0];
+
+                        serialNumberPattern = new Regex(@"Count=(\d+)");
+                        programNamePattern = new Regex(@"Program=([_a-zA-Z-0-9. ]+)");
+
+                        CustomResource = "PEWS2779";
+                        CustomStatus = "PASS";
+                        CustomDateTime = DateTime.Now;
+
                         break;
 
                     case ImportMode.ERSA:
+
                         break;
 
                     case ImportMode.NGDTAKAYA:
@@ -243,7 +355,6 @@ namespace DataPumpV2.Classes
                         ResultPattern = new Regex(@"\nPANEL SERIAL NUMBER.+(PASSED|FAILED)");
                         programNamePattern = new Regex(@"\nBoard: ([A-z0-9-_]+)\n");
 
-                        resultForm = "PASSED";
 
                         break;
 
@@ -252,12 +363,11 @@ namespace DataPumpV2.Classes
                         ResultPattern = new Regex(@"\nPANEL SERIAL NUMBER.+(PASSED|FAILED)");
                         programNamePattern = new Regex(@"\nBoard: ([A-z0-9-_]+)\n");
 
-                        resultForm = "PASSED";
 
                         break;
 
                     case ImportMode.TRACEFILE:
-                        break;*/
+                        break;
                 }
 
                 if (CSVMode)
@@ -272,7 +382,7 @@ namespace DataPumpV2.Classes
                                 Status = record["Result"].ToLower().Contains(PassResultRepresentation.ToLower()) ? "PASS" : "FAIL",
                                 ResourceName = record["Resource"],
                                 Program = CustomProgram ?? record["Program"],
-                                ResultForm = resultForm ?? record["Form"],
+                                //ResultForm = resultForm ?? record["Form"],
                                 Timedate = GetDateTime(record["DateTime"])
                             };
 
@@ -296,16 +406,33 @@ namespace DataPumpV2.Classes
                         ProductResult product = new ProductResult
                         {
                             SerialNb = result[1],//RegexLibrary.GetFirstGroup(serialNumberPattern, logFileContent),
-                            Status = (RegexLibrary.GetFirstGroup(ResultPattern, logFileContent).ToLower().Contains(PassResultRepresentation.ToLower())) ? "PASS" : "FAIL",
-                            ResourceName = RegexLibrary.GetFirstGroup(ResourcePattern, logFileContent),
+                            Status = CustomStatus ?? ((RegexLibrary.GetFirstGroup(ResultPattern, logFileContent).ToLower().Contains(PassResultRepresentation.ToLower())) ? "PASS" : "FAIL"),
+                            ResourceName = CustomResource ?? RegexLibrary.GetFirstGroup(ResourcePattern, logFileContent),
                             Program = CustomProgram ?? RegexLibrary.GetFirstGroup(programNamePattern, logFileContent),
-                            ResultForm = resultForm ?? RegexLibrary.GetFirstGroup(ResultformPattern, logFileContent),
-                            Timedate = GetDateTime(RegexLibrary.GetFirstGroup(datePattern, logFileContent) + RegexLibrary.GetFirstGroup(timePattern, logFileContent))
+                            //ResultForm = resultForm ?? RegexLibrary.GetFirstGroup(ResultformPattern, logFileContent),
+                            Timedate = CustomDateTime ?? GetDateTime(RegexLibrary.GetFirstGroup(datePattern, logFileContent) + RegexLibrary.GetFirstGroup(timePattern, logFileContent))
                         };
 
                         //Add product to the collection
                         ProductResultCollection.Add(product);
                     }
+                }
+
+                foreach (RawFileAttribute rawAttr in rawAttributes)
+                {
+                    string attrName, attrValue;
+
+                    attrName = rawAttr.AttributeName;
+                    if(rawAttr.Regex != null)
+                    {
+                        attrValue = RegexLibrary.GetFirstMatch(rawAttr.Regex, rawAttr.Data);
+                    }
+                    else
+                    {
+                        attrValue = rawAttr.Data;
+                    }
+
+                    FileAttributesCollection.Add(new FileAttribute(attrName, attrValue));
                 }
             }
             catch (Exception exception)
@@ -408,7 +535,7 @@ namespace DataPumpV2.Classes
                 try
                 {
                     // Update the "Pattern" form records with family serial numbers
-                    foreach (var member in DatabaseManager.ExecuteStoredProcedure(SQLProcedures.GetTracePartionning, Reference))
+                    foreach (var member in DatabaseManager.ExecuteStoredProcedure(SQLProcedures.GetTracePartionning, Globals.SQLLogins["DatapumpDB"], Reference))
                     {
                         string sequenceID = member["SequenceID"].ToString();
                         string childID = member["ChildID"].ToString();

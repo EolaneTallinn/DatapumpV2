@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj": {}
+    "C:\\Users\\tn_merqe\\Documents\\GitHub\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj": {
+    "C:\\Users\\tn_merqe\\Documents\\GitHub\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj",
+        "projectUniqueName": "C:\\Users\\tn_merqe\\Documents\\GitHub\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj",
         "projectName": "DataPumpV2",
-        "projectPath": "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj",
+        "projectPath": "C:\\Users\\tn_merqe\\Documents\\GitHub\\DatapumpV2\\DataPumpV2\\DataPumpV2.csproj",
         "packagesPath": "C:\\Users\\tn_merqe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tn_merqe\\Documents\\GitHub\\ScriptVault\\DatapumpV2\\DataPumpV2\\obj\\",
+        "outputPath": "C:\\Users\\tn_merqe\\Documents\\GitHub\\DatapumpV2\\DataPumpV2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

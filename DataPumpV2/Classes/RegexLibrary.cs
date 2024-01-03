@@ -14,9 +14,9 @@ namespace DataPumpV2.Classes
         /// <param name="text"></param>
         /// <returns>match.Value</returns>
         /// <exception cref="ArgumentException"></exception>
-        internal static string GetFirstMatch(string pattern, string text)
+        internal static string GetFirstMatch(Regex pattern, string text)
         {
-            Match match = Regex.Match(text, pattern);
+            Match match = Regex.Match(text, pattern.ToString());
             if (match.Success)
             {
                 return match.Value;
